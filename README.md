@@ -6,11 +6,11 @@
 
 | Role | Name | Responsibilities |
 |------|------|------------------|
-| Project Lead + Admin Backend | [Your Name] | GitHub management, ER diagram, SQL schema, Admin CRUD (orphans) |
-| Database Specialist | [Member 1 Name] | Database setup, normalization, indexes, connection pooling |
-| User Backend | [Member 3 Name] | Login, registration, session handling, donor/volunteer features |
-| Security & Validation | [Member 4 Name] | Password encryption (BCrypt), login filters, error pages, cookies |
-| Frontend & Report | [Member 5 Name] | JSP pages, CSS responsiveness, wireframes, final PDF report |
+| Project Lead + Admin Backend | Bibisha Chhantyal| GitHub management, ER diagram, SQL schema, Admin CRUD (orphans) |
+| Database Specialist | Rakshya Phagami | Database setup, normalization, indexes, connection pooling |
+| User Backend | Pooja Subedi] | Login, registration, session handling, donor/volunteer features |
+| Security & Validation |Krishtina Gurung | Password encryption (BCrypt), login filters, error pages, cookies |
+| Frontend & Report | Sristy Bhandari | JSP pages, CSS responsiveness, wireframes, final PDF report |
 
 ## 🗓️ Milestone 1 (Due: May 4, 2026)
 
