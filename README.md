@@ -1,93 +1,130 @@
-# 🏠 Orphanage Management System
+# 🏠 Orphanage Management System – Milestone 1
 
-> A complete web application for managing orphanages, donors, and volunteers. Built for coursework submission.
+> A complete web application for managing orphanages, donors, volunteers, and donations. Built with JSP, Servlets, MySQL, and Maven.  
+> **Milestone 1 submission – May 4, 2026**
 
-## 👥 Team 5 Members
+---
 
-| Role | Name | Responsibilities |
-|------|------|------------------|
-| Project Lead + Admin Backend | Bibisha Chhantyal| GitHub management, ER diagram, SQL schema, Admin CRUD (orphans) |
-| Database Specialist | Rakshya Phagami | Database setup, normalization, indexes, connection pooling |
-| User Backend | Pooja Subedi] | Login, registration, session handling, donor/volunteer features |
-| Security & Validation |Krishtina Gurung | Password encryption (BCrypt), login filters, error pages, cookies |
-| Frontend & Report | Sristy Bhandari | JSP pages, CSS responsiveness, wireframes, final PDF report |
+## 👥 Team 5 Members & Roles
 
-## 🗓️ Milestone 1 (Due: May 4, 2026)
+| Member | Role | Responsibilities |
+|--------|------|------------------|
+| **Bibisha Chhantyal** (Lead) | Project Lead + Admin Backend | GitHub management, ER diagram, SQL schema, Orphan CRUD, merging PRs |
+| **Rakshya Phagami** | Database Specialist | Database setup, normalization, indexes, connection pooling, backup |
+| **Pooja Subedi** | User Backend | Login, registration, session handling, Donor module |
+| **Krishtina Gurung** | Security & Validation | Password encryption (BCrypt), login filters, error pages, cookies, Volunteer module |
+| **Sristy Bhandari** | Frontend & Report | JSP styling, CSS responsiveness, wireframes, final PDF report, Donation module |
 
-- ✅ Wireframes (login, admin, user)
-- ✅ Database tables + ER diagram
-- ✅ Login & registration (encrypted passwords)
-- ✅ Sessions & filters
-- ✅ Admin CRUD (orphans module)
-- ✅ Draft report
+---
 
-## 🛠️ Tech Stack
+## 🛠️ Technology Stack
 
-- **Frontend**: JSP, HTML5, CSS3 (responsive), Bootstrap 5
-- **Backend**: Java Servlets, JDBC
-- **Database**: MySQL
-- **Server**: Apache Tomcat 9/10
-- **Security**: BCrypt for password hashing
-- **Version Control**: Git + GitHub (private repo)
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | JSP, HTML5, CSS3, Bootstrap 5 |
+| **Backend** | Java Servlets, JDBC |
+| **Database** | MySQL 8.0 |
+| **Server** | Apache Tomcat 9 |
+| **Security** | BCrypt for password hashing |
+| **Build Tool** | Maven |
+| **Version Control** | Git + GitHub (private repo) |
+---
 
-## 📂 Project Structure
+## 📁 Folder Structure
 Orphanage-Management-System/
+├── pom.xml
+├── README.md
+├── database_schema.sql
 ├── src/
-│ ├── main/
-│ │ ├── java/
-│ │ │ ├── com.orphanage.model/ (User, Orphan, Donation, Volunteer)
-│ │ │ ├── com.orphanage.dao/ (UserDAO, OrphanDAO, DonationDAO)
-│ │ │ ├── com.orphanage.servlet/ (LoginServlet, AdminOrphanServlet)
-│ │ │ └── com.orphanage.util/ (PasswordUtil, DBConnection)
-│ │ ├── webapp/
-│ │ │ ├── admin/ (admin dashboard, orphan CRUD JSPs)
-│ │ │ ├── user/ (login, register, user dashboard)
-│ │ │ ├── WEB-INF/
-│ │ │ │ └── web.xml
-│ │ │ └── css/ (styles.css)
-│ │ └── resources/
-│ │ └── schema.sql (database creation script)
+│ └── main/
+│ ├── java/
+│ │ └── com/
+│ │ └── orphanage/
+│ │ ├── model/
+│ │ │ ├── Orphan.java
+│ │ │ ├── User.java
+│ │ │ ├── Donor.java
+│ │ │ ├── Volunteer.java
+│ │ │ └── Donation.java
+│ │ ├── dao/
+│ │ │ ├── OrphanDAO.java
+│ │ │ ├── UserDAO.java
+│ │ │ ├── DonorDAO.java
+│ │ │ ├── VolunteerDAO.java
+│ │ │ └── DonationDAO.java
+│ │ ├── servlet/
+│ │ │ ├── AdminOrphanServlet.java
+│ │ │ ├── LoginServlet.java
+│ │ │ ├── RegisterServlet.java
+│ │ │ ├── LogoutServlet.java
+│ │ │ ├── DonorServlet.java
+│ │ │ ├── VolunteerServlet.java
+│ │ │ └── DonationServlet.java
+│ │ └── util/
+│ │ ├── DatabaseConnection.java
+│ │ ├── PasswordUtil.java
+│ │ └── AuthFilter.java
+│ └── webapp/
+│ ├── admin/
+│ │ ├── orphan-list.jsp
+│ │ └── orphan-form.jsp
+│ ├── donor/
+│ │ ├── donor-list.jsp
+│ │ └── donor-form.jsp
+│ ├── volunteer/
+│ │ ├── volunteer-list.jsp
+│ │ └── volunteer-form.jsp
+│ ├── donation/
+│ │ ├── donation-list.jsp
+│ │ └── donation-form.jsp
+│ ├── login.jsp
+│ ├── register.jsp
+│ ├── logout.jsp
+│ ├── error404.jsp
+│ ├── error500.jsp
+│ ├── css/
+│ │ └── styles.css
+│ └── WEB-INF/
+│ └── web.xml
 ├── docs/
+│ ├── wireframes/ (screenshots of wireframes)
 │ ├── er-diagram.png
-│ ├── wireframes/
 │ └── final-report.pdf
-└── README.md
+└── target/ (generated WAR, ignored by Git)
 
-text
+---
+
+## ✅ Milestone 1 Requirements Checklist
+
+| Requirement | Status |
+|-------------|--------|
+| Wireframes (login, admin, user) | ✅ Included in `/docs/wireframes` |
+| Database tables + ER diagram | ✅ `schema.sql` + ER diagram in `/docs` |
+| Login & registration (encrypted passwords) | ✅ BCrypt hashing |
+| Sessions & filters | ✅ `AuthFilter` protects `/admin/*` |
+| Admin CRUD (orphans module) | ✅ Orphan list, add, edit, delete |
+| Draft report | ✅ `final-report.pdf` (work in progress) |
+
+---
 
 ## 🚀 How to Run Locally
 
+### Prerequisites
+- Java 8 or 11
+- Apache Tomcat 9
+- MySQL 8.0
+- Maven (or use IntelliJ built‑in)
+- Git
+
+### Step‑by‑step
+
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/Orphanage-Management-System.git
-Import into IDE (Eclipse/IntelliJ) as a Dynamic Web Project
+   git clone https://github.com/bibishachhantyala24-tech/Orphanage-Management-System.git
+   cd Orphanage-Management-System
 
-Set up MySQL database
 
-Create a database named orphanage_db
 
-Run the schema.sql file from /src/main/resources/
+---
 
-Configure Tomcat
-
-Add Tomcat 9+ server in your IDE
-
-Deploy the project
-
-Access the app
-
-Home: http://localhost:8080/Orphanage-Management-System/
-
-Admin login: (default: admin@orphanage.com / password123)
-
-🔒 Branch Protection Rules
-main branch is protected – requires pull request and 1 approval
-
-All development happens on dev branch
-
-Commit messages format: [M1] description (M1, M2, M3, M4, M5 for team members)
-
-📝 Progress Log
-Date	Task	Completed By
-April 17, 2026	Repository created, ER diagram done, SQL schema pushed	[Your Name]
-...	...	...
+## 📁 Folder Structure
