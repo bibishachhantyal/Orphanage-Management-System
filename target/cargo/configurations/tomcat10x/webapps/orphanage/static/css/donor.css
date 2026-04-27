@@ -1,0 +1,587 @@
+/* ============================================================
+   DONOR MODULE — donor-list.jsp & donor-form.jsp styles
+   Matches the project's purple/glassmorphism aesthetic
+   ============================================================ */
+
+/* ---- Page Header ---- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.75rem 0 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.page-header-content h1 {
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -.01em;
+}
+
+.page-header-content p {
+    color: #6b7280;
+    font-size: .9rem;
+    margin-top: .2rem;
+}
+
+/* ---- Buttons ---- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .7rem 1.35rem;
+    font-family: inherit;
+    font-size: .9rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+    letter-spacing: .01em;
+    line-height: 1.4;
+}
+
+.btn-primary {
+    color: #fff;
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    box-shadow: 0 4px 14px rgba(124, 58, 237, .3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px rgba(124, 58, 237, .4);
+}
+
+.btn-secondary {
+    color: #4b5563;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+}
+
+.btn-secondary:hover {
+    background: #e5e7eb;
+    transform: translateY(-1px);
+}
+
+.btn-icon {
+    font-size: 1rem;
+}
+
+.btn-add .btn-icon {
+    font-size: .9rem;
+}
+
+/* ---- Alert Banners ---- */
+.alert-banner {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    padding: .8rem 1.15rem;
+    border-radius: 12px;
+    font-size: .88rem;
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+    position: relative;
+}
+
+.alert-banner.success {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.alert-banner.error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.alert-icon {
+    font-size: 1.05rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.alert-close {
+    position: absolute;
+    right: .75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: .95rem;
+    cursor: pointer;
+    opacity: .5;
+    padding: .25rem;
+    line-height: 1;
+    transition: opacity .2s;
+}
+
+.alert-close:hover {
+    opacity: 1;
+}
+
+/* ---- Table Card ---- */
+.table-card {
+    background: rgba(255, 255, 255, .85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .04);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.table-header {
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.table-info {
+    font-size: .88rem;
+    color: #6b7280;
+}
+
+.table-count {
+    font-weight: 700;
+    color: #111827;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* ---- Table ---- */
+#donorTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#donorTable thead th {
+    padding: .75rem 1.25rem;
+    text-align: left;
+    font-size: .7rem;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    background: #f9fafb;
+    white-space: nowrap;
+}
+
+#donorTable tbody td {
+    padding: .9rem 1.25rem;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: .88rem;
+    color: #374151;
+}
+
+#donorTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#donorTable tbody tr:hover {
+    background: #faf5ff;
+}
+
+.th-num { width: 50px; }
+.th-amount { white-space: nowrap; }
+.th-actions { width: 110px; text-align: center; }
+
+.td-num {
+    color: #9ca3af;
+    font-weight: 500;
+    font-size: .82rem;
+}
+
+.td-name {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.td-email {
+    color: #6b7280;
+}
+
+.td-phone {
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+.td-amount {
+    font-weight: 700;
+    color: #111827;
+    white-space: nowrap;
+}
+
+.td-actions {
+    text-align: center;
+}
+
+/* ---- Donor Avatar ---- */
+.donor-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: .8rem;
+    flex-shrink: 0;
+    text-transform: uppercase;
+}
+
+/* ---- Badges ---- */
+.badge {
+    padding: .2rem .65rem;
+    border-radius: 6px;
+    font-size: .72rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    white-space: nowrap;
+}
+
+.badge-purple {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.badge-orange {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.text-muted {
+    color: #9ca3af;
+}
+
+/* ---- Icon Action Buttons (Edit / Delete) ---- */
+.btn-icon-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: .95rem;
+    transition: transform .15s, background .15s, box-shadow .15s;
+    line-height: 1;
+}
+
+.btn-edit {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.btn-edit:hover {
+    background: #dbeafe;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(37, 99, 235, .2);
+}
+
+.btn-delete {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.btn-delete:hover {
+    background: #fee2e2;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(220, 38, 38, .2);
+}
+
+/* ---- Empty State ---- */
+.empty-state {
+    text-align: center;
+    padding: 3.5rem 1.5rem;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: .75rem;
+    opacity: .6;
+}
+
+.empty-state h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: .35rem;
+}
+
+.empty-state p {
+    color: #9ca3af;
+    font-size: .9rem;
+    margin-bottom: 1.25rem;
+}
+
+/* ==============================================================
+   DONOR FORM PAGE — donor-form.jsp
+   ============================================================== */
+
+/* ---- Breadcrumb ---- */
+.breadcrumb {
+    margin: 1.25rem 0 .5rem;
+    font-size: .85rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+.breadcrumb a {
+    color: #7c3aed;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-sep {
+    color: #d1d5db;
+    font-size: 1rem;
+}
+
+/* ---- Form Page Layout ---- */
+.form-page {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 1rem 3rem;
+}
+
+/* ---- Form Card ---- */
+.form-card {
+    background: rgba(255, 255, 255, .88);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .55);
+    border-radius: 20px;
+    padding: 2rem 2.25rem 2.5rem;
+    width: 100%;
+    max-width: 680px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .06), 0 0 30px rgba(139, 92, 246, .06);
+}
+
+.form-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.form-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.form-card-icon.add {
+    background: #ede9fe;
+}
+
+.form-card-icon.edit {
+    background: #eff6ff;
+}
+
+.form-card-header h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -.01em;
+}
+
+.form-card-subtitle {
+    color: #6b7280;
+    font-size: .85rem;
+    margin-top: .15rem;
+}
+
+/* ---- Form Sections ---- */
+.form-section {
+    margin-bottom: 1.75rem;
+}
+
+.form-section-title {
+    font-size: .9rem;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+/* ---- Form Row (2-column) ---- */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* ---- Form Group ---- */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group--half {
+    max-width: 50%;
+}
+
+.form-group label {
+    display: block;
+    font-size: .76rem;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: .35rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.required {
+    color: #ef4444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: .78rem 1rem;
+    font-family: inherit;
+    font-size: .92rem;
+    color: #1f2937;
+    background: rgba(255, 255, 255, .7);
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    background: #fff;
+    border-color: #a78bfa;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, .1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #9ca3af;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%239CA3AF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+/* ---- Form Actions ---- */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: .75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #f3f4f6;
+}
+
+/* ---- Alert inside form ---- */
+.form-card .alert-banner {
+    margin-bottom: 1.25rem;
+}
+
+.form-card .alert-error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+    padding: .7rem 1rem;
+    border-radius: 10px;
+    font-size: .88rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+/* ---- Animation ---- */
+.animate-in {
+    animation: fadeUp .5s cubic-bezier(.4, 0, .2, 1) forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-card {
+        padding: 1.5rem 1.25rem 2rem;
+        border-radius: 16px;
+    }
+
+    .form-group--half {
+        max-width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #donorTable thead th,
+    #donorTable tbody td {
+        padding: .7rem .8rem;
+        font-size: .8rem;
+    }
+
+    .donor-avatar {
+        display: none;
+    }
+}
