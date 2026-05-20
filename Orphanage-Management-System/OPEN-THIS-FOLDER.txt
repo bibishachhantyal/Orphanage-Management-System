@@ -1,0 +1,20 @@
+Hope Haven — Orphanage Management System
+=========================================
+
+This is your MAIN project folder. Open THIS folder in Cursor/VS Code.
+
+HOW TO RUN (easy):
+  1. Start MySQL in XAMPP Control Panel
+  2. Double-click: setup-database.bat  (first time only)
+  3. Double-click: run.bat
+  4. Browser: http://localhost:8081/orphanage/
+  5. Login: admin / 1234
+
+PowerShell (from this folder):
+  cd C:\Users\HP\Downloads\Orphanage-Management-System
+  mvn clean package cargo:run
+
+Old nested path (do not use):
+  Downloads\GrpCourseworkJava (3)\GrpCourseworkJava\...
+
+You can delete the old zip folder after confirming this copy works.
