@@ -1,0 +1,43 @@
+<header class="site-nav site-nav-app">
+    <div class="inner">
+        <c:set var="dashPath" value="/user/dashboard"/>
+        <c:if test="${sessionScope.user.role == 'ADMIN'}"><c:set var="dashPath" value="/admin/dashboard"/></c:if>
+        <a class="brand" href="${pageContext.request.contextPath}${dashPath}">
+            <span class="brand-icon">&#9825;</span> Hope Haven
+        </a>
+        <nav class="links">
+            <c:choose>
+                <c:when test="${sessionScope.user.role == 'ADMIN'}">
+                    <a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
+                    <a href="${pageContext.request.contextPath}/admin/orphan">Children</a>
+                    <a href="${pageContext.request.contextPath}/donor/list">Donors</a>
+                    <a href="${pageContext.request.contextPath}/volunteer/list">Volunteers</a>
+                    <a href="${pageContext.request.contextPath}/donation/list">Donations</a>
+                </c:when>
+                <c:when test="${sessionScope.user.role == 'DONOR'}">
+                    <a href="${pageContext.request.contextPath}/user/dashboard">Dashboard</a>
+                    <a href="${pageContext.request.contextPath}/donate">Donate</a>
+                    <a href="${pageContext.request.contextPath}/public/orphans">Children</a>
+                    <a href="${pageContext.request.contextPath}/donation/list">Donations</a>
+                    <a href="${pageContext.request.contextPath}/user/profile.jsp">Profile</a>
+                </c:when>
+                <c:when test="${sessionScope.user.role == 'VOLUNTEER'}">
+                    <a href="${pageContext.request.contextPath}/user/dashboard">Dashboard</a>
+                    <a href="${pageContext.request.contextPath}/public/orphans">Children</a>
+                    <a href="${pageContext.request.contextPath}/apply-volunteer">Apply</a>
+                    <a href="${pageContext.request.contextPath}/volunteer/list">Volunteers</a>
+                    <a href="${pageContext.request.contextPath}/user/profile.jsp">Profile</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/user/dashboard">Dashboard</a>
+                    <a href="${pageContext.request.contextPath}/public/orphans">Children</a>
+                    <a href="${pageContext.request.contextPath}/user/wishlist">Wishlist</a>
+                    <a href="${pageContext.request.contextPath}/user/profile.jsp">Profile</a>
+                    <a href="${pageContext.request.contextPath}/donation/list">Donations</a>
+                </c:otherwise>
+            </c:choose>
+            <a href="${pageContext.request.contextPath}/">Public site</a>
+            <a class="nav-user" href="${pageContext.request.contextPath}/logout">Logout</a>
+        </nav>
+    </div>
+</header>

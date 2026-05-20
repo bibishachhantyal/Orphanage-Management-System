@@ -1,0 +1,17 @@
+<header class="site-nav">
+    <div class="inner">
+        <a class="brand" href="${pageContext.request.contextPath}/">
+            <span class="brand-icon">&#9825;</span> Hope Haven
+        </a>
+        <nav class="links">
+            <a href="${pageContext.request.contextPath}/">Home</a>
+            <a href="${pageContext.request.contextPath}/about.html">About</a>
+            <a href="${pageContext.request.contextPath}/contact.html">Contact</a>
+            <a href="${pageContext.request.contextPath}/public/orphans">Our children</a>
+            <a href="${pageContext.request.contextPath}/donate">Donate</a>
+            <a href="${pageContext.request.contextPath}/apply-volunteer">Volunteer</a>
+            <a href="${pageContext.request.contextPath}/login">Login</a>
+            <a href="${pageContext.request.contextPath}/register">Register</a>
+        </nav>
+    </div>
+</header>
