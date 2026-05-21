@@ -1,5 +1,6 @@
 orphanage\servlet\DonationServlet.class
 orphanage\dao\VolunteerApplicationDAO.class
+orphanage\servlet\VolunteerReportServlet.class
 orphanage\servlet\VolunteerServlet.class
 orphanage\dao\VolunteerDAO.class
 orphanage\servlet\PublicDonateServlet.class
@@ -12,11 +13,14 @@ orphanage\dao\AdminStatsDAO.class
 orphanage\dao\OrphanDAO.class
 orphanage\dao\DonorDAO.class
 orphanage\util\CookieUtil.class
+orphanage\service\ReportService.class
 orphanage\util\PasswordUtil.class
+orphanage\service\UserService.class
 orphanage\model\TimeSlotStats.class
 orphanage\servlet\PublicOrphanServlet.class
+orphanage\service\DonationService.class
+orphanage\servlet\OrphanStatusReportServlet.class
 orphanage\servlet\WishlistServlet.class
-orphanage\util\SessionUtil.class
 orphanage\model\Orphan.class
 orphanage\model\Volunteer.class
 orphanage\servlet\RegisterServlet.class
@@ -32,9 +36,12 @@ orphanage\servlet\UserDashboardServlet.class
 orphanage\model\ContactMessage.class
 orphanage\model\Donation.class
 orphanage\servlet\HomeServlet.class
+orphanage\service\ServiceResult.class
 orphanage\servlet\AdminDashboardServlet.class
 orphanage\dao\ContactMessageDAO.class
+orphanage\servlet\ProfileServlet.class
 orphanage\servlet\AdminOrphanServlet.class
 orphanage\servlet\VolunteerApplyServlet.class
 orphanage\dao\DonationDAO.class
+orphanage\service\OrphanService.class
 orphanage\model\VolunteerApplication.class

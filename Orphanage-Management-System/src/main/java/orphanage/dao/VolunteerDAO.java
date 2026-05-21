@@ -4,7 +4,9 @@ import orphanage.model.Volunteer;
 import orphanage.util.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class VolunteerDAO {
     // Create
@@ -105,5 +107,20 @@ public class VolunteerDAO {
             if (rs.next()) return rs.getInt(1);
         } catch (SQLException e) { e.printStackTrace(); }
         return 0;
+    }
+
+    public Map<String, Integer> getCountByStatus() {
+        Map<String, Integer> counts = new LinkedHashMap<>();
+        String sql = "SELECT TRIM(status) AS st, COUNT(*) AS cnt FROM volunteers GROUP BY TRIM(status)";
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                counts.put(rs.getString("st"), rs.getInt("cnt"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return counts;
     }
 }

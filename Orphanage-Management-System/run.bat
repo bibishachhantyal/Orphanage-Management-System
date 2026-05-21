@@ -60,7 +60,7 @@ echo ============================================
 echo  Server starting on:
 echo  http://localhost:8081/orphanage/
 echo.
-echo  Login: admin  /  1234
+echo  Login: admin  /  Admin@123
 echo  Press Ctrl+C to stop the server
 echo ============================================
 echo.

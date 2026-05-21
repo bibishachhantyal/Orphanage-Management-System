@@ -12,8 +12,11 @@
 <div class="container">
     <div class="page-header">
         <h1>Welcome, <c:out value="${sessionScope.user.username}"/></h1>
-        <p class="lead">Donor portal — support children through donations and sponsorship.</p>
+        <p class="lead">Donor portal — search children, donate, and manage your account.</p>
     </div>
+
+    <%@ include file="/WEB-INF/jspf/user-search.jspf" %>
+
     <div class="stats">
         <div class="stat-card"><strong>${sponsoredCount}</strong><span class="label">Children in care</span></div>
         <div class="stat-card"><strong>${donationCount}</strong><span class="label">Donation records</span></div>
@@ -37,7 +40,7 @@
         <div class="feature-box">
             <h3>Your profile</h3>
             <p>Account details and contact information.</p>
-            <a class="btn btn-sm" href="${pageContext.request.contextPath}/user/profile.jsp">Profile</a>
+            <a class="btn btn-sm" href="${pageContext.request.contextPath}/user/profile">Profile</a>
         </div>
     </div>
 </div>

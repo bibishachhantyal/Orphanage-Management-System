@@ -18,22 +18,19 @@
                     <a href="${pageContext.request.contextPath}/user/dashboard">Dashboard</a>
                     <a href="${pageContext.request.contextPath}/donate">Donate</a>
                     <a href="${pageContext.request.contextPath}/public/orphans">Children</a>
-                    <a href="${pageContext.request.contextPath}/donation/list">Donations</a>
-                    <a href="${pageContext.request.contextPath}/user/profile.jsp">Profile</a>
+                    <a href="${pageContext.request.contextPath}/user/profile">Profile</a>
                 </c:when>
                 <c:when test="${sessionScope.user.role == 'VOLUNTEER'}">
                     <a href="${pageContext.request.contextPath}/user/dashboard">Dashboard</a>
                     <a href="${pageContext.request.contextPath}/public/orphans">Children</a>
                     <a href="${pageContext.request.contextPath}/apply-volunteer">Apply</a>
-                    <a href="${pageContext.request.contextPath}/volunteer/list">Volunteers</a>
-                    <a href="${pageContext.request.contextPath}/user/profile.jsp">Profile</a>
+                    <a href="${pageContext.request.contextPath}/user/profile">Profile</a>
                 </c:when>
                 <c:otherwise>
                     <a href="${pageContext.request.contextPath}/user/dashboard">Dashboard</a>
                     <a href="${pageContext.request.contextPath}/public/orphans">Children</a>
                     <a href="${pageContext.request.contextPath}/user/wishlist">Wishlist</a>
-                    <a href="${pageContext.request.contextPath}/user/profile.jsp">Profile</a>
-                    <a href="${pageContext.request.contextPath}/donation/list">Donations</a>
+                    <a href="${pageContext.request.contextPath}/user/profile">Profile</a>
                 </c:otherwise>
             </c:choose>
             <a href="${pageContext.request.contextPath}/">Public site</a>

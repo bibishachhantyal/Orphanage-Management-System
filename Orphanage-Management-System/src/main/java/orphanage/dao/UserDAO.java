@@ -50,13 +50,73 @@ public class UserDAO {
     }
 
     public boolean emailExists(String email) {
-        String sql = "SELECT 1 FROM users WHERE email = ? LIMIT 1";
+        return emailExistsForOther(email, -1);
+    }
+
+    public boolean emailExistsForOther(String email, int excludeUserId) {
+        String sql = "SELECT 1 FROM users WHERE email = ? AND id <> ? LIMIT 1";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, email);
+            ps.setInt(2, excludeUserId < 0 ? -1 : excludeUserId);
             try (ResultSet rs = ps.executeQuery()) {
                 return rs.next();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean phoneExists(String phone) {
+        return phoneExistsForOther(phone, -1);
+    }
+
+    public boolean phoneExistsForOther(String phone, int excludeUserId) {
+        if (phone == null || phone.isBlank()) {
+            return false;
+        }
+        String sql = "SELECT 1 FROM users WHERE phone = ? AND id <> ? LIMIT 1";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, phone.trim());
+            ps.setInt(2, excludeUserId < 0 ? -1 : excludeUserId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public User findById(int id) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapRow(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean updateProfile(User user) {
+        String sql = "UPDATE users SET full_name=?, email=?, phone=?, address=?, password_hash=? WHERE id=?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, user.getFullName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPhone());
+            ps.setString(4, user.getAddress());
+            ps.setString(5, user.getPassword_hash());
+            ps.setInt(6, user.getId());
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }

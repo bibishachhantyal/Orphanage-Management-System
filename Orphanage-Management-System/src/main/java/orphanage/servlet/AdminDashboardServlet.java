@@ -1,6 +1,7 @@
 package orphanage.servlet;
 
 import orphanage.dao.*;
+import orphanage.model.TimeSlotStats;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,10 +31,34 @@ public class AdminDashboardServlet extends HttpServlet {
         req.setAttribute("pendingUsers", userDAO.findPendingApproval());
         req.setAttribute("pendingVolunteerApps", applicationDAO.findPending());
         req.setAttribute("contactMessages", contactDAO.findAllOrderByDateDesc());
-        req.setAttribute("visitorSlots", statsDAO.getVisitorStats());
-        req.setAttribute("donorSlots", statsDAO.getDonorActivityStats());
-        req.setAttribute("volunteerSlots", statsDAO.getVolunteerStats());
-        req.setAttribute("userRegSlots", statsDAO.getRegistrationStats());
+        TimeSlotStats visitorSlots = statsDAO.getVisitorStats();
+        TimeSlotStats donorSlots = statsDAO.getDonorActivityStats();
+        TimeSlotStats volunteerSlots = statsDAO.getVolunteerStats();
+        TimeSlotStats userRegSlots = statsDAO.getRegistrationStats();
+        req.setAttribute("visitorSlots", visitorSlots);
+        req.setAttribute("donorSlots", donorSlots);
+        req.setAttribute("volunteerSlots", volunteerSlots);
+        req.setAttribute("userRegSlots", userRegSlots);
+        req.setAttribute("chartSlotMax", maxSlotValue(visitorSlots, donorSlots, volunteerSlots, userRegSlots));
+        req.setAttribute("chartFlowMax", maxFlowTotal(visitorSlots, donorSlots, volunteerSlots, userRegSlots));
         req.getRequestDispatcher("/admin/dashboard.jsp").forward(req, resp);
+    }
+
+    private static int maxSlotValue(TimeSlotStats... stats) {
+        int max = 1;
+        for (TimeSlotStats s : stats) {
+            max = Math.max(max, s.getMorning());
+            max = Math.max(max, s.getAfternoon());
+            max = Math.max(max, s.getEvening());
+        }
+        return max;
+    }
+
+    private static int maxFlowTotal(TimeSlotStats... stats) {
+        int max = 1;
+        for (TimeSlotStats s : stats) {
+            max = Math.max(max, s.getTotal());
+        }
+        return max;
     }
 }

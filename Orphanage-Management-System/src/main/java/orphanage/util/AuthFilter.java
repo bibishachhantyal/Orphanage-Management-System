@@ -14,7 +14,7 @@ import orphanage.model.User;
 
 import java.io.IOException;
 
-@WebFilter({"/admin/*", "/donor/*", "/volunteer/*", "/donation/*", "/user/*"})
+@WebFilter({"/admin/*", "/donor/*", "/volunteer/*", "/donation/*", "/user/*", "/donate", "/apply-volunteer"})
 public class AuthFilter implements Filter {
 
     @Override

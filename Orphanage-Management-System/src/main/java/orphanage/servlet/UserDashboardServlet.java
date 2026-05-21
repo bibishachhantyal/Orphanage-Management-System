@@ -8,8 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import orphanage.dao.DonationDAO;
 import orphanage.model.User;
-import orphanage.dao.OrphanDAO;
 import orphanage.dao.VolunteerDAO;
+import orphanage.service.OrphanService;
 import orphanage.util.WishlistUtil;
 
 import java.io.IOException;
@@ -17,7 +17,7 @@ import java.io.IOException;
 @WebServlet("/user/dashboard")
 public class UserDashboardServlet extends HttpServlet {
 
-    private final OrphanDAO orphanDAO = new OrphanDAO();
+    private final OrphanService orphanService = new OrphanService();
     private final DonationDAO donationDAO = new DonationDAO();
     private final VolunteerDAO volunteerDAO = new VolunteerDAO();
 
@@ -26,13 +26,13 @@ public class UserDashboardServlet extends HttpServlet {
             throws ServletException, IOException {
         req.setAttribute("donationCount", donationDAO.getTotalCount());
         req.setAttribute("volunteerHours", volunteerDAO.getTotalCount());
-        req.setAttribute("sponsoredCount", orphanDAO.getActiveCount());
+        req.setAttribute("sponsoredCount", orphanService.getActiveCount());
         req.setAttribute("wishlistCount", WishlistUtil.getIds(req.getSession()).size());
 
         String q = req.getParameter("q");
         if (q != null && !q.isBlank()) {
             req.setAttribute("searchQuery", q.trim());
-            req.setAttribute("searchResults", orphanDAO.searchActiveOrphans(q));
+            req.setAttribute("searchResults", orphanService.searchActive(q));
         }
 
         HttpSession session = req.getSession(false);

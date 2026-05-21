@@ -20,6 +20,7 @@
                 <li>Passwords are stored with BCrypt</li>
                 <li>Role is set to USER automatically</li>
                 <li>An administrator must approve your account</li>
+                <li>Phone number must be unique if provided</li>
             </ul>
         </aside>
         <div class="auth-card">

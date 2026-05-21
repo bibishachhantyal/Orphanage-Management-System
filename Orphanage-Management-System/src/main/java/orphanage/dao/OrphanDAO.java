@@ -5,7 +5,9 @@ import orphanage.util.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrphanDAO {
 
@@ -258,5 +260,27 @@ public class OrphanDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    /** Count of children grouped by status (active, inactive, adopted) for admin reports. */
+    public Map<String, Integer> getCountByStatus() {
+        Map<String, Integer> counts = new LinkedHashMap<>();
+        counts.put("active", 0);
+        counts.put("inactive", 0);
+        counts.put("adopted", 0);
+        String sql = "SELECT LOWER(TRIM(status)) AS st, COUNT(*) AS cnt FROM orphans GROUP BY LOWER(TRIM(status))";
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                String status = rs.getString("st");
+                if (status != null && counts.containsKey(status)) {
+                    counts.put(status, rs.getInt("cnt"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return counts;
     }
 }

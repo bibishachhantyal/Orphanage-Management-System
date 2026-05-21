@@ -49,11 +49,74 @@
         <div class="chart-grid">
             <div class="chart-card">
                 <h3>Activity by time slot</h3>
-                <canvas id="slotChart" height="220" aria-label="Bar chart of morning, afternoon, and evening activity"></canvas>
+                <div class="css-bar-chart" role="img" aria-label="Bar chart of morning, afternoon, and evening activity">
+                    <div class="css-bar-legend">
+                        <span class="css-legend-item"><span class="css-legend-swatch css-swatch-brand"></span> Visitors</span>
+                        <span class="css-legend-item"><span class="css-legend-swatch css-swatch-accent"></span> Donations</span>
+                        <span class="css-legend-item"><span class="css-legend-swatch css-swatch-teal"></span> Volunteers</span>
+                        <span class="css-legend-item"><span class="css-legend-swatch css-swatch-slate"></span> Registrations</span>
+                    </div>
+                    <div class="css-bar-groups">
+                        <div class="css-bar-group">
+                            <div class="css-bar-cluster">
+                                <div class="css-bar css-swatch-brand" style="height:${visitorSlots.morning * 100 / chartSlotMax}%" title="Visitors: ${visitorSlots.morning}"></div>
+                                <div class="css-bar css-swatch-accent" style="height:${donorSlots.morning * 100 / chartSlotMax}%" title="Donations: ${donorSlots.morning}"></div>
+                                <div class="css-bar css-swatch-teal" style="height:${volunteerSlots.morning * 100 / chartSlotMax}%" title="Volunteers: ${volunteerSlots.morning}"></div>
+                                <div class="css-bar css-swatch-slate" style="height:${userRegSlots.morning * 100 / chartSlotMax}%" title="Registrations: ${userRegSlots.morning}"></div>
+                            </div>
+                            <span class="css-bar-label">Morning</span>
+                        </div>
+                        <div class="css-bar-group">
+                            <div class="css-bar-cluster">
+                                <div class="css-bar css-swatch-brand" style="height:${visitorSlots.afternoon * 100 / chartSlotMax}%" title="Visitors: ${visitorSlots.afternoon}"></div>
+                                <div class="css-bar css-swatch-accent" style="height:${donorSlots.afternoon * 100 / chartSlotMax}%" title="Donations: ${donorSlots.afternoon}"></div>
+                                <div class="css-bar css-swatch-teal" style="height:${volunteerSlots.afternoon * 100 / chartSlotMax}%" title="Volunteers: ${volunteerSlots.afternoon}"></div>
+                                <div class="css-bar css-swatch-slate" style="height:${userRegSlots.afternoon * 100 / chartSlotMax}%" title="Registrations: ${userRegSlots.afternoon}"></div>
+                            </div>
+                            <span class="css-bar-label">Afternoon</span>
+                        </div>
+                        <div class="css-bar-group">
+                            <div class="css-bar-cluster">
+                                <div class="css-bar css-swatch-brand" style="height:${visitorSlots.evening * 100 / chartSlotMax}%" title="Visitors: ${visitorSlots.evening}"></div>
+                                <div class="css-bar css-swatch-accent" style="height:${donorSlots.evening * 100 / chartSlotMax}%" title="Donations: ${donorSlots.evening}"></div>
+                                <div class="css-bar css-swatch-teal" style="height:${volunteerSlots.evening * 100 / chartSlotMax}%" title="Volunteers: ${volunteerSlots.evening}"></div>
+                                <div class="css-bar css-swatch-slate" style="height:${userRegSlots.evening * 100 / chartSlotMax}%" title="Registrations: ${userRegSlots.evening}"></div>
+                            </div>
+                            <span class="css-bar-label">Evening</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="chart-card">
                 <h3>Statistics flow overview</h3>
-                <canvas id="flowChart" height="220" aria-label="Line chart of total activity across categories"></canvas>
+                <div class="css-bar-chart css-bar-chart-single" role="img" aria-label="Bar chart of total activity across categories">
+                    <div class="css-bar-groups">
+                        <div class="css-bar-group">
+                            <div class="css-bar-cluster">
+                                <div class="css-bar css-swatch-brand css-bar-wide" style="height:${visitorSlots.total * 100 / chartFlowMax}%" title="Visitors total: ${visitorSlots.total}"></div>
+                            </div>
+                            <span class="css-bar-label">Visitors</span>
+                        </div>
+                        <div class="css-bar-group">
+                            <div class="css-bar-cluster">
+                                <div class="css-bar css-swatch-accent css-bar-wide" style="height:${donorSlots.total * 100 / chartFlowMax}%" title="Donations total: ${donorSlots.total}"></div>
+                            </div>
+                            <span class="css-bar-label">Donations</span>
+                        </div>
+                        <div class="css-bar-group">
+                            <div class="css-bar-cluster">
+                                <div class="css-bar css-swatch-teal css-bar-wide" style="height:${volunteerSlots.total * 100 / chartFlowMax}%" title="Volunteers total: ${volunteerSlots.total}"></div>
+                            </div>
+                            <span class="css-bar-label">Volunteers</span>
+                        </div>
+                        <div class="css-bar-group">
+                            <div class="css-bar-cluster">
+                                <div class="css-bar css-swatch-slate css-bar-wide" style="height:${userRegSlots.total * 100 / chartFlowMax}%" title="Registrations total: ${userRegSlots.total}"></div>
+                            </div>
+                            <span class="css-bar-label">Registrations</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -142,9 +205,11 @@
             <a class="btn btn-sm" href="${pageContext.request.contextPath}/donation/list">Manage</a>
         </div>
         <div class="feature-box">
-            <h3>Reports</h3>
-            <p>Summary totals for coursework demo.</p>
-            <a class="btn btn-sm btn-secondary" href="${pageContext.request.contextPath}/admin/donation-report">View report</a>
+            <h3>Reports &amp; analysis</h3>
+            <p>Donation, orphan status, and volunteer reports for decision-making.</p>
+            <a class="btn btn-sm" href="${pageContext.request.contextPath}/admin/donation-report">Donations</a>
+            <a class="btn btn-sm btn-secondary" href="${pageContext.request.contextPath}/admin/orphan-report">Children</a>
+            <a class="btn btn-sm btn-secondary" href="${pageContext.request.contextPath}/admin/volunteer-report">Volunteers</a>
         </div>
         <div class="feature-box">
             <h3>Public site</h3>
@@ -278,55 +343,5 @@
 </main>
 
 <%@ include file="/WEB-INF/jspf/footer.jspf" %>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script>
-(function () {
-    var labels = ['Morning', 'Afternoon', 'Evening'];
-    var visitors = [${visitorSlots.morning}, ${visitorSlots.afternoon}, ${visitorSlots.evening}];
-    var donations = [${donorSlots.morning}, ${donorSlots.afternoon}, ${donorSlots.evening}];
-    var volunteers = [${volunteerSlots.morning}, ${volunteerSlots.afternoon}, ${volunteerSlots.evening}];
-    var registrations = [${userRegSlots.morning}, ${userRegSlots.afternoon}, ${userRegSlots.evening}];
-    var brand = '#0d6e5a';
-    var accent = '#f59e42';
-
-    new Chart(document.getElementById('slotChart'), {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [
-                { label: 'Visitors', data: visitors, backgroundColor: brand },
-                { label: 'Donations', data: donations, backgroundColor: accent },
-                { label: 'Volunteers', data: volunteers, backgroundColor: '#14a085' },
-                { label: 'Registrations', data: registrations, backgroundColor: '#475569' }
-            ]
-        },
-        options: {
-            responsive: true,
-            plugins: { legend: { position: 'bottom' } },
-            scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
-        }
-    });
-
-    new Chart(document.getElementById('flowChart'), {
-        type: 'line',
-        data: {
-            labels: ['Visitors', 'Donations', 'Volunteers', 'Registrations'],
-            datasets: [{
-                label: 'Total activity',
-                data: [${visitorSlots.total}, ${donorSlots.total}, ${volunteerSlots.total}, ${userRegSlots.total}],
-                borderColor: brand,
-                backgroundColor: 'rgba(13, 110, 90, 0.15)',
-                fill: true,
-                tension: 0.35
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
-        }
-    });
-})();
-</script>
 </body>
 </html>

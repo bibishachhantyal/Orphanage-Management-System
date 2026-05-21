@@ -16,18 +16,18 @@ public class PasswordUtil {
         return BCrypt.hashpw(plain, BCrypt.gensalt());
     }
 
-    /** Accepts BCrypt hashes or plain text (coursework / legacy rows). */
+    /** Verifies a plain password against a BCrypt hash stored in the database. */
     public static boolean checkPassword(String plain, String stored) {
         if (plain == null || stored == null) {
             return false;
         }
-        if (stored.startsWith("$2a$") || stored.startsWith("$2b$")) {
-            try {
-                return BCrypt.checkpw(plain, stored);
-            } catch (IllegalArgumentException e) {
-                return false;
-            }
+        if (!stored.startsWith("$2a$") && !stored.startsWith("$2b$")) {
+            return false;
         }
-        return plain.equals(stored);
+        try {
+            return BCrypt.checkpw(plain, stored);
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 }

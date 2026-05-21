@@ -4,7 +4,9 @@ import orphanage.model.Donation;
 import orphanage.util.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DonationDAO {
     // Create
@@ -120,5 +122,45 @@ public class DonationDAO {
             if (rs.next()) return rs.getDouble(1);
         } catch (SQLException e) { e.printStackTrace(); }
         return 0.0;
+    }
+
+    public Map<String, Double> getAmountByPaymentMethod() {
+        Map<String, Double> map = new LinkedHashMap<>();
+        String sql = "SELECT COALESCE(NULLIF(TRIM(payment_method), ''), 'Unknown') AS method, SUM(amount) AS total FROM donations GROUP BY method ORDER BY total DESC";
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                map.put(rs.getString("method"), rs.getDouble("total"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    public List<Donation> getRecentDonations(int limit) {
+        List<Donation> list = new ArrayList<>();
+        String sql = "SELECT * FROM donations ORDER BY donation_date DESC, id DESC LIMIT ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, Math.max(1, limit));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Donation d = new Donation();
+                    d.setId(rs.getInt("id"));
+                    d.setDonor_id(rs.getInt("donor_id"));
+                    d.setOrphan_id(rs.getInt("orphan_id"));
+                    d.setAmount(rs.getDouble("amount"));
+                    d.setDonation_date(rs.getString("donation_date"));
+                    d.setPayment_method(rs.getString("payment_method"));
+                    d.setPurpose(rs.getString("purpose"));
+                    list.add(d);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

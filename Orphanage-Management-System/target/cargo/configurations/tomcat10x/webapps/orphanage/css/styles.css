@@ -1243,6 +1243,103 @@ textarea { min-height: 110px; resize: vertical; }
     font-size: 1rem;
 }
 
+.css-bar-chart {
+    margin-top: 0.75rem;
+}
+
+.css-bar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.css-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.css-legend-swatch {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.css-swatch-brand { background: #0d6e5a; }
+.css-swatch-accent { background: #f59e42; }
+.css-swatch-teal { background: #14a085; }
+.css-swatch-slate { background: #475569; }
+
+.css-bar-groups {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 0.75rem;
+    min-height: 180px;
+    padding-top: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.css-bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+}
+
+.css-bar-cluster {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.25rem;
+    height: 150px;
+    width: 100%;
+}
+
+.css-bar-chart-single .css-bar-group {
+    max-width: 5rem;
+}
+
+.css-bar {
+    width: 0.65rem;
+    min-height: 2px;
+    border-radius: 3px 3px 0 0;
+    transition: height 0.2s ease;
+}
+
+.css-bar-wide {
+    width: 2rem;
+}
+
+.css-bar-label {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+}
+
+.css-bar-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 0.25rem;
+}
+
+.section-divider {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px solid var(--border);
+}
+
+.search-results-section {
+    margin-bottom: 1rem;
+}
+
 .form-actions {
     display: flex;
     flex-wrap: wrap;

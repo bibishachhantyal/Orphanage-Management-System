@@ -1,11 +1,7 @@
 package orphanage.servlet;
 
-import orphanage.dao.DonationDAO;
-import orphanage.dao.DonorDAO;
-import orphanage.dao.OrphanDAO;
-import orphanage.model.Donation;
-import orphanage.model.Donor;
-import orphanage.model.Orphan;
+import orphanage.service.DonationService;
+import orphanage.service.ServiceResult;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,88 +9,38 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 @WebServlet("/donate")
 public class PublicDonateServlet extends HttpServlet {
-    private final DonorDAO donorDAO = new DonorDAO();
-    private final DonationDAO donationDAO = new DonationDAO();
-    private final OrphanDAO orphanDAO = new OrphanDAO();
+    private final DonationService donationService = new DonationService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.setAttribute("orphans", orphanDAO.getActiveOrphansForPublic());
+        req.setAttribute("orphans", donationService.getActiveOrphansForDonateForm());
         req.getRequestDispatcher("/donate.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String name = trim(req.getParameter("full_name"));
-        String email = trim(req.getParameter("email"));
-        String phone = trim(req.getParameter("phone"));
-        String amountStr = trim(req.getParameter("amount"));
-        String purpose = trim(req.getParameter("purpose"));
-        String payment = trim(req.getParameter("payment_method"));
-        String orphanParam = trim(req.getParameter("orphan_id"));
+        ServiceResult<String> result = donationService.processPublicDonation(
+                trim(req.getParameter("full_name")),
+                trim(req.getParameter("email")),
+                trim(req.getParameter("phone")),
+                trim(req.getParameter("amount")),
+                trim(req.getParameter("purpose")),
+                trim(req.getParameter("payment_method")),
+                trim(req.getParameter("orphan_id")));
 
-        if (name.isEmpty() || email.isEmpty() || amountStr.isEmpty()) {
-            req.setAttribute("error", "Please enter your name, email, and donation amount.");
-            req.setAttribute("orphans", orphanDAO.getActiveOrphansForPublic());
+        if (!result.isSuccess()) {
+            req.setAttribute("error", result.getMessage());
+            req.setAttribute("orphans", donationService.getActiveOrphansForDonateForm());
             req.getRequestDispatcher("/donate.jsp").forward(req, resp);
             return;
         }
 
-        double amount;
-        try {
-            amount = Double.parseDouble(amountStr);
-            if (amount <= 0) {
-                throw new NumberFormatException();
-            }
-        } catch (NumberFormatException e) {
-            req.setAttribute("error", "Please enter a valid donation amount.");
-            req.setAttribute("orphans", orphanDAO.getActiveOrphansForPublic());
-            req.getRequestDispatcher("/donate.jsp").forward(req, resp);
-            return;
-        }
-
-        Donor donor = donorDAO.findByEmail(email);
-        if (donor == null) {
-            donor = new Donor();
-            donor.setFull_name(name);
-            donor.setEmail(email);
-            donor.setPhone(phone);
-            donor.setAddress("");
-            donor.setDonor_type("Individual");
-            int id = donorDAO.addDonorReturningId(donor);
-            if (id < 0) {
-                req.setAttribute("error", "Could not save your details. Please try again.");
-                req.setAttribute("orphans", orphanDAO.getActiveOrphansForPublic());
-                req.getRequestDispatcher("/donate.jsp").forward(req, resp);
-                return;
-            }
-            donor.setId(id);
-        }
-
-        Donation d = new Donation();
-        d.setDonor_id(donor.getId());
-        if (!orphanParam.isEmpty()) {
-            try {
-                d.setOrphan_id(Integer.parseInt(orphanParam));
-            } catch (NumberFormatException ignored) {
-                d.setOrphan_id(0);
-            }
-        } else {
-            d.setOrphan_id(0);
-        }
-        d.setAmount(amount);
-        d.setDonation_date(LocalDate.now().toString());
-        d.setPayment_method(payment.isEmpty() ? "Online" : payment);
-        d.setPurpose(purpose.isEmpty() ? "General orphanage support" : purpose);
-        donationDAO.addDonation(d);
-
-        resp.sendRedirect(req.getContextPath() + "/thankyou.jsp?type=donation&name=" + urlEncode(name));
+        resp.sendRedirect(req.getContextPath() + "/thankyou.jsp?type=donation&name=" + urlEncode(result.getData()));
     }
 
     private static String trim(String s) {
