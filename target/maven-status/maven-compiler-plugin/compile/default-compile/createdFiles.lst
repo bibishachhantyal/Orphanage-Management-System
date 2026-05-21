@@ -1,4 +1,0 @@
-com\orphanage\dao\OrphanDAO.class
-com\orphanage\model\Orphan.class
-com\orphanage\util\DatabaseConnection.class
-com\orphanage\servlet\AdminOrphanServlet.class
